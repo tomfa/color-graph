@@ -11,7 +11,7 @@ const FullscreenWrapper = styled.div`
   @media ${size.large} {
     overflow: hidden;
   }
-  background-color: #101010;
+  background-color: transparent;
 `;
 
 const InnerFullScreen = styled.div`
