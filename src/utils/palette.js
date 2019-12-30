@@ -1,25 +1,58 @@
-import React, { useState } from 'react';
+import * as d3 from "d3-scale-chromatic";
 
-const colorPalettes = [
-  ['#d77fa1', '#e6b2c6', '#fef6fb', '#d6e5fa'],
-  ['#ffa259', '#fe6845', '#fa4252', '#91bd3a'],
-  ['#561f55', '#8b2f97', '#cf56a1', '#fcb2bf'],
-  ['#f8b195', '#f67280', '#c06c84', '#6c5b7b'],
-  ['#f8b195', '#f67280', '#4d80e4', '#6c5b7b'],
-  ['#beebe9', '#beebe9', '#fffdf9', '#ffe3ed'],
-  ['#9be3de', '#beebe9', '#fffdf9', '#ffe3ed'],
-  ['#eafbea', '#6f9a8d', '#1f6650', '#ea5e5e'],
-  ['#51eaea', '#ffdbc5', '#ff9d76', '#ef4339'],
-  ['#621055', '#b52b65', '#ed6663', '#ffa372'],
+const interpolators = [
+  d3.interpolateBlues,
+  d3.interpolateBrBG,
+  d3.interpolateBuGn,
+  d3.interpolateBuPu,
+  d3.interpolateCividis,
+  d3.interpolateCool,
+  d3.interpolateCubehelixDefault,
+  d3.interpolateGnBu,
+  d3.interpolateGreens,
+  d3.interpolateGreys,
+  d3.interpolateInferno,
+  d3.interpolateMagma,
+  d3.interpolateOrRd,
+  d3.interpolateOranges,
+  d3.interpolatePRGn,
+  d3.interpolatePiYG,
+  d3.interpolatePlasma,
+  d3.interpolatePuBu,
+  d3.interpolatePuBuGn,
+  d3.interpolatePuOr,
+  d3.interpolatePuRd,
+  d3.interpolatePurples,
+  d3.interpolateRainbow,
+  d3.interpolateRdBu,
+  d3.interpolateRdGy,
+  d3.interpolateRdPu,
+  d3.interpolateRdYlBu,
+  d3.interpolateRdYlGn,
+  d3.interpolateReds,
+  d3.interpolateSinebow,
+  d3.interpolateSpectral,
+  d3.interpolateTurbo,
+  d3.interpolateViridis,
+  d3.interpolateWarm,
+  d3.interpolateYlGn,
+  d3.interpolateYlGnBu,
+  d3.interpolateYlOrBr,
+  d3.interpolateYlOrRd
 ];
-
-const getRandomPalette = () => {
-  return colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
+const getRandomInterPolator = () => {
+  return interpolators[Math.floor(Math.random() * interpolators.length)];
 };
-
-export const usePalette = () => {
-  const [palette, setPalette] = useState(getRandomPalette());
-  const setRandomPalette = () => setPalette(getRandomPalette());
-
-  return [palette, setRandomPalette];
+const normalize = ({ minValue, maxValue, value }) => {
+  const constrainedValue = Math.min(Math.max(value, minValue), maxValue);
+  return (constrainedValue - minValue) / (maxValue - minValue);
+};
+export const getInterPolator = ({ data, interpolator }) => {
+  const colorFunction = interpolator || getRandomInterPolator();
+  const maxValue = Math.max(...data);
+  const minValue = Math.min(...data);
+  return value => {
+    const normalizedValue = normalize({ minValue, maxValue, value });
+    return colorFunction(normalizedValue);
+  };
 };
