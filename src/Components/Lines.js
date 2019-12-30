@@ -6,8 +6,17 @@ import { getInterPolator } from "../utils/palette";
 import { useWindowSize } from "../utils/styles";
 
 const SVGLine = styled.line`
-  transition: all 1.5s;
+  transition: stroke-dashoffset 5s;
+  transition-timing-function: ease-in-out;
   cursor: pointer;
+  stroke-dasharray: ${props => props.height};
+
+  stroke-dashoffset: -${props => props.height / 2};
+
+  &:hover {
+    stroke-dashoffset: 0;
+    transition-duration: 0.5s;
+  }
 
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -31,6 +40,7 @@ export const Lines = ({ data }) => {
     >
       {data.map((value, i) => (
         <SVGLine
+          height={svgHeight}
           key={i}
           x1={2 * i + 1}
           x2={2 * i + 1}
