@@ -15,8 +15,9 @@ const SVGLine = styled.line`
 
 export const Lines = ({ data }) => {
   const { width, height } = useWindowSize();
-  const getColor = getInterPolator({ data, interpolator: d3.interpolateBlues });
-
+  const [getColor, setInterpolator] = useState(() =>
+    getInterPolator({ data, interpolator: d3.interpolateBlues })
+  );
   const count = data.length;
   const svgWidth = count * 2;
   const svgHeight = svgWidth * (height / width);
@@ -37,6 +38,7 @@ export const Lines = ({ data }) => {
           y2={svgHeight}
           stroke={getColor(value)}
           strokeWidth="2"
+          onClick={() => setInterpolator(() => getInterPolator({ data }))}
         />
       ))}
     </svg>
