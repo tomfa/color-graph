@@ -2,13 +2,16 @@ import React, { useState } from "react";
 
 import { FullScreen } from "./Components/Fullscreen";
 import { Lines } from "./Components/Lines";
-import { LinearData } from "./data";
+import { LinearData, RandomData } from "./data";
 import { FixedSection, Header, SubHeader } from "./Components/FixedSection";
 import { getColorInterpolator } from "./utils/palette";
-import { InfoBox, InfoDescription, InfoTitle } from "./Components/InfoBox";
+import { Button } from "./Components/Button";
 
 export const App = () => {
-  const { title, description, data } = LinearData;
+  const dataSources = [LinearData, RandomData];
+  const [dataSourceIndex, setDataSourceIndex] = useState(0);
+  const dataSource = dataSources[dataSourceIndex % dataSources.length];
+  const { title, description, data } = dataSource;
   const [currentValue, setValue] = useState(null);
 
   const [interpolator, setInterpolator] = useState(() =>
@@ -24,10 +27,14 @@ export const App = () => {
           </a>
         </SubHeader>
         <Header>{interpolator.name}</Header>
+        <Button onClick={() => setDataSourceIndex(dataSourceIndex + 1)}>
+          {title}
+        </Button>
         {currentValue !== null && (
           <SubHeader>Selected value: {currentValue}</SubHeader>
         )}
       </FixedSection>
+
       <Lines
         data={data}
         getColor={interpolator.func}
@@ -35,10 +42,6 @@ export const App = () => {
           setValue(value);
         }}
       />
-      <InfoBox>
-        <InfoTitle>{title}</InfoTitle>
-        <InfoDescription>{description}</InfoDescription>
-      </InfoBox>
     </FullScreen>
   );
 };

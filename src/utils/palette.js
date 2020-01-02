@@ -65,5 +65,9 @@ export const getColorInterpolator = ({ data, interpolatorName }) => {
     const normalizedValue = normalize({ minValue, maxValue, value });
     return interPolator.func(normalizedValue);
   };
-  return { name: interPolator.name, func: normalizedInterpolator };
+  return {
+    name: interPolator.name,
+    func: normalizedInterpolator,
+    maxColor: interPolator.func(0.8)
+  };
 };
