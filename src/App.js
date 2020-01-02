@@ -10,9 +10,13 @@ import { Button } from "./Components/Button";
 export const App = () => {
   const dataSources = [LinearData, RandomData];
   const [dataSourceIndex, setDataSourceIndex] = useState(0);
+  const nextDataSource = () => {
+    setDataSourceIndex(dataSourceIndex + 1);
+    setSelectedValue(null);
+  };
   const dataSource = dataSources[dataSourceIndex % dataSources.length];
   const { title, description, data } = dataSource;
-  const [currentValue, setValue] = useState(null);
+  const [selectedValue, setSelectedValue] = useState(null);
 
   const [interpolator, setInterpolator] = useState(() =>
     getColorInterpolator({ data, interpolatorName: "interpolateBlues" })
@@ -29,11 +33,9 @@ export const App = () => {
           </a>
         </SubHeader>
         <Header>{interpolator.name}</Header>
-        <Button onClick={() => setDataSourceIndex(dataSourceIndex + 1)}>
-          {title}
-        </Button>
-        {currentValue !== null && (
-          <SubHeader>Selected value: {currentValue}</SubHeader>
+        <Button onClick={nextDataSource}>{title}</Button>
+        {selectedValue !== null && (
+          <SubHeader>Selected value: {selectedValue}</SubHeader>
         )}
       </FixedSection>
 
@@ -41,7 +43,7 @@ export const App = () => {
         data={data}
         getColor={getColor}
         onLineClick={value => {
-          setValue(value);
+          setSelectedValue(value);
         }}
       />
     </FullScreen>
