@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import * as d3 from "d3-scale-chromatic";
 
-import { getInterPolator } from "../utils/palette";
 import { useWindowSize } from "../utils/styles";
 
 const SVGLine = styled.line`
@@ -22,11 +20,8 @@ const SVGLine = styled.line`
   -webkit-tap-highlight-color: transparent;
 `;
 
-export const Lines = ({ data }) => {
+export const Lines = ({ data, onLineClick, getColor }) => {
   const { width, height } = useWindowSize();
-  const [getColor, setInterpolator] = useState(() =>
-    getInterPolator({ data, interpolator: d3.interpolateBlues })
-  );
   const count = data.length;
   const svgWidth = count * 2;
   const svgHeight = svgWidth * (height / width);
@@ -48,7 +43,7 @@ export const Lines = ({ data }) => {
           y2={svgHeight}
           stroke={getColor(value)}
           strokeWidth="2"
-          onClick={() => setInterpolator(() => getInterPolator({ data }))}
+          onClick={() => !!onLineClick && onLineClick(value)}
         />
       ))}
     </svg>
