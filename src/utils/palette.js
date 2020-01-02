@@ -1,58 +1,69 @@
 import * as d3 from "d3-scale-chromatic";
 
-const interpolators = [
-  d3.interpolateBlues,
-  d3.interpolateBrBG,
-  d3.interpolateBuGn,
-  d3.interpolateBuPu,
-  d3.interpolateCividis,
-  d3.interpolateCool,
-  d3.interpolateCubehelixDefault,
-  d3.interpolateGnBu,
-  d3.interpolateGreens,
-  d3.interpolateGreys,
-  d3.interpolateInferno,
-  d3.interpolateMagma,
-  d3.interpolateOrRd,
-  d3.interpolateOranges,
-  d3.interpolatePRGn,
-  d3.interpolatePiYG,
-  d3.interpolatePlasma,
-  d3.interpolatePuBu,
-  d3.interpolatePuBuGn,
-  d3.interpolatePuOr,
-  d3.interpolatePuRd,
-  d3.interpolatePurples,
-  d3.interpolateRainbow,
-  d3.interpolateRdBu,
-  d3.interpolateRdGy,
-  d3.interpolateRdPu,
-  d3.interpolateRdYlBu,
-  d3.interpolateRdYlGn,
-  d3.interpolateReds,
-  d3.interpolateSinebow,
-  d3.interpolateSpectral,
-  d3.interpolateTurbo,
-  d3.interpolateViridis,
-  d3.interpolateWarm,
-  d3.interpolateYlGn,
-  d3.interpolateYlGnBu,
-  d3.interpolateYlOrBr,
-  d3.interpolateYlOrRd
-];
+const interpolators = {
+  interpolateBlues: d3.interpolateBlues,
+  interpolateBrBG: d3.interpolateBrBG,
+  interpolateBuGn: d3.interpolateBuGn,
+  interpolateBuPu: d3.interpolateBuPu,
+  interpolateCividis: d3.interpolateCividis,
+  interpolateCool: d3.interpolateCool,
+  interpolateCubehelixDefault: d3.interpolateCubehelixDefault,
+  interpolateGnBu: d3.interpolateGnBu,
+  interpolateGreens: d3.interpolateGreens,
+  interpolateGreys: d3.interpolateGreys,
+  interpolateInferno: d3.interpolateInferno,
+  interpolateMagma: d3.interpolateMagma,
+  interpolateOrRd: d3.interpolateOrRd,
+  interpolateOranges: d3.interpolateOranges,
+  interpolatePRGn: d3.interpolatePRGn,
+  interpolatePiYG: d3.interpolatePiYG,
+  interpolatePlasma: d3.interpolatePlasma,
+  interpolatePuBu: d3.interpolatePuBu,
+  interpolatePuBuGn: d3.interpolatePuBuGn,
+  interpolatePuOr: d3.interpolatePuOr,
+  interpolatePuRd: d3.interpolatePuRd,
+  interpolatePurples: d3.interpolatePurples,
+  interpolateRainbow: d3.interpolateRainbow,
+  interpolateRdBu: d3.interpolateRdBu,
+  interpolateRdGy: d3.interpolateRdGy,
+  interpolateRdPu: d3.interpolateRdPu,
+  interpolateRdYlBu: d3.interpolateRdYlBu,
+  interpolateRdYlGn: d3.interpolateRdYlGn,
+  interpolateReds: d3.interpolateReds,
+  interpolateSinebow: d3.interpolateSinebow,
+  interpolateSpectral: d3.interpolateSpectral,
+  interpolateTurbo: d3.interpolateTurbo,
+  interpolateViridis: d3.interpolateViridis,
+  interpolateWarm: d3.interpolateWarm,
+  interpolateYlGn: d3.interpolateYlGn,
+  interpolateYlGnBu: d3.interpolateYlGnBu,
+  interpolateYlOrBr: d3.interpolateYlOrBr,
+  interpolateYlOrRd: d3.interpolateYlOrRd
+};
+const getInterPolator = name => {
+  const names = Object.keys(interpolators);
+  if (!name || !names.includes(name)) {
+    return null;
+  }
+  return { name, func: interpolators[name] };
+};
 const getRandomInterPolator = () => {
-  return interpolators[Math.floor(Math.random() * interpolators.length)];
+  const names = Object.keys(interpolators);
+  const name = names[Math.floor(Math.random() * names.length)];
+  return { name, func: interpolators[name] };
 };
 const normalize = ({ minValue, maxValue, value }) => {
   const constrainedValue = Math.min(Math.max(value, minValue), maxValue);
   return (constrainedValue - minValue) / (maxValue - minValue);
 };
-export const getInterPolator = ({ data, interpolator }) => {
-  const colorFunction = interpolator || getRandomInterPolator();
+export const getColorInterpolator = ({ data, interpolatorName }) => {
+  const interPolator =
+    getInterPolator(interpolatorName) || getRandomInterPolator();
   const maxValue = Math.max(...data);
   const minValue = Math.min(...data);
-  return value => {
+  const normalizedInterpolator = value => {
     const normalizedValue = normalize({ minValue, maxValue, value });
-    return colorFunction(normalizedValue);
+    return interPolator.func(normalizedValue);
   };
+  return { name: interPolator.name, func: normalizedInterpolator };
 };

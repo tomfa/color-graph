@@ -4,17 +4,16 @@ import { FullScreen } from "./Components/Fullscreen";
 import { Lines } from "./Components/Lines";
 import { LinearData } from "./data";
 import { FixedSection, Header, SubHeader } from "./Components/FixedSection";
-import { getInterPolator } from "./utils/palette";
-import * as d3 from "d3-scale-chromatic";
+import { getColorInterpolator } from "./utils/palette";
 import { InfoBox, InfoDescription, InfoTitle } from "./Components/InfoBox";
 
 export const App = () => {
   const { title, description, data } = LinearData;
-  const [getColor, setInterpolator] = useState(() =>
-    getInterPolator({ data, interpolator: d3.interpolateBlues })
-  );
-
   const [currentValue, setValue] = useState(null);
+
+  const [interpolator, setInterpolator] = useState(() =>
+    getColorInterpolator({ data, interpolatorName: "interpolateBlues" })
+  );
 
   return (
     <FullScreen>
@@ -24,14 +23,14 @@ export const App = () => {
             d3-scale-chromatic
           </a>
         </SubHeader>
-        <Header>ColorPalette</Header>
+        <Header>{interpolator.name}</Header>
         {currentValue !== null && (
           <SubHeader>Selected value: {currentValue}</SubHeader>
         )}
       </FixedSection>
       <Lines
         data={data}
-        getColor={getColor}
+        getColor={interpolator.func}
         onLineClick={value => {
           setValue(value);
         }}
