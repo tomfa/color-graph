@@ -32,7 +32,12 @@ export const App = () => {
             d3-scale-chromatic
           </a>
         </SubHeader>
-        <Header>{interpolator.name}</Header>
+        <Header
+          onClick={() => setInterpolator(getColorInterpolator({ data }))}
+          color={interpolator.themeColor}
+        >
+          {interpolator.name}
+        </Header>
         <Button onClick={nextDataSource}>{title}</Button>
         {selectedValue !== null && (
           <SubHeader>Selected value: {selectedValue}</SubHeader>
