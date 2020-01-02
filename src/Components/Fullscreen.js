@@ -5,13 +5,9 @@ import { size } from '../utils/styles';
 
 const FullscreenWrapper = styled.div`
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
-
-  @media ${size.large} {
-    overflow: hidden;
-  }
-  background-color: transparent;
 `;
 
 const InnerFullScreen = styled.div`
