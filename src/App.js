@@ -4,7 +4,7 @@ import { FullScreen } from "./Components/Fullscreen";
 import { Lines } from "./Components/Lines";
 import { LinearData, RandomData } from "./data";
 import { FixedSection, Header, SubHeader } from "./Components/FixedSection";
-import { getColorInterpolator } from "./utils/palette";
+import { getColorInterpolator, getNormalizer } from "./utils/palette";
 import { Button } from "./Components/Button";
 
 export const App = () => {
@@ -17,6 +17,8 @@ export const App = () => {
   const [interpolator, setInterpolator] = useState(() =>
     getColorInterpolator({ data, interpolatorName: "interpolateBlues" })
   );
+  const normalize = getNormalizer({ data });
+  const getColor = value => interpolator.func(normalize(value));
 
   return (
     <FullScreen>
@@ -37,7 +39,7 @@ export const App = () => {
 
       <Lines
         data={data}
-        getColor={interpolator.func}
+        getColor={getColor}
         onLineClick={value => {
           setValue(value);
         }}

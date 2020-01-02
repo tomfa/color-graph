@@ -52,22 +52,22 @@ const getRandomInterPolator = () => {
   const name = names[Math.floor(Math.random() * names.length)];
   return { name, func: interpolators[name] };
 };
-const normalize = ({ minValue, maxValue, value }) => {
-  const constrainedValue = Math.min(Math.max(value, minValue), maxValue);
-  return (constrainedValue - minValue) / (maxValue - minValue);
-};
+
 export const getColorInterpolator = ({ data, interpolatorName }) => {
   const interPolator =
     getInterPolator(interpolatorName) || getRandomInterPolator();
-  const maxValue = Math.max(...data);
-  const minValue = Math.min(...data);
-  const normalizedInterpolator = value => {
-    const normalizedValue = normalize({ minValue, maxValue, value });
-    return interPolator.func(normalizedValue);
-  };
   return {
     name: interPolator.name,
-    func: normalizedInterpolator,
-    maxColor: interPolator.func(0.8)
+    func: interPolator.func,
+    themeColor: interPolator.func(0.8)
+  };
+};
+
+export const getNormalizer = ({ data }) => {
+  const maxValue = Math.max(...data);
+  const minValue = Math.min(...data);
+  return value => {
+    const constrainedValue = Math.min(Math.max(value, minValue), maxValue);
+    return (constrainedValue - minValue) / (maxValue - minValue);
   };
 };
