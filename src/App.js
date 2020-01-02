@@ -3,9 +3,22 @@ import React, { useState } from "react";
 import { FullScreen } from "./Components/Fullscreen";
 import { Lines } from "./Components/Lines";
 import { LinearData, RandomData } from "./data";
-import { FixedSection, Header, SubHeader } from "./Components/FixedSection";
+import {
+  Description,
+  Footer,
+  Header,
+  FixedSection,
+  SubHeader
+} from "./Components/FixedSection";
 import { getColorInterpolator, getNormalizer } from "./utils/palette";
-import { Button } from "./Components/Button";
+import {
+  Button,
+  ButtonIcon,
+  ButtonLabel,
+  ButtonLink
+} from "./Components/Button";
+import { Menu } from "./Components/Menu";
+import { Spinner } from "./Components/Icon";
 
 export const App = () => {
   const dataSources = [LinearData, RandomData];
@@ -21,6 +34,8 @@ export const App = () => {
   const [interpolator, setInterpolator] = useState(() =>
     getColorInterpolator({ data, interpolatorName: "interpolateBlues" })
   );
+  const nextColorInterpolator = () =>
+    setInterpolator(getColorInterpolator({ data }));
   const normalize = getNormalizer({ data });
   const getColor = value => interpolator.func(normalize(value));
 
@@ -32,16 +47,41 @@ export const App = () => {
             d3-scale-chromatic
           </a>
         </SubHeader>
-        <Header
-          onClick={() => setInterpolator(getColorInterpolator({ data }))}
-          color={interpolator.themeColor}
-        >
-          {interpolator.name}
-        </Header>
-        <Button onClick={nextDataSource}>{title}</Button>
+        <Header>{title}</Header>
+        <Description>{description}</Description>
+        <Footer>
+          Click the buttons in the lower right corner to change data or color
+          palette.
+        </Footer>
         {selectedValue !== null && (
           <SubHeader>Selected value: {selectedValue}</SubHeader>
         )}
+
+        <Menu>
+          <ButtonLink href="https://github.com/tomfa/color-graph">
+            <ButtonLabel>Code</ButtonLabel>
+            <ButtonIcon>
+              <img
+                width="27"
+                height="27"
+                alt="Github icon"
+                src="./github.png"
+              />
+            </ButtonIcon>
+          </ButtonLink>
+          <Button onClick={nextDataSource}>
+            <ButtonLabel>{dataSource.title}</ButtonLabel>
+            <ButtonIcon>
+              <Spinner color={"black"} />
+            </ButtonIcon>
+          </Button>
+          <Button onClick={nextColorInterpolator}>
+            <ButtonLabel>d3.{interpolator.name}</ButtonLabel>
+            <ButtonIcon>
+              <Spinner color={interpolator.themeColor} />
+            </ButtonIcon>
+          </Button>
+        </Menu>
       </FixedSection>
 
       <Lines
