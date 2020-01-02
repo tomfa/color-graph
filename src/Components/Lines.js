@@ -35,7 +35,7 @@ export const Lines = ({ data, onLineClick, getColor }) => {
       {data.map((value, i) => (
         <SVGLine
           height={svgHeight}
-          key={i}
+          key={String(value)+String(i)}
           x1={2 * i + 1}
           x2={2 * i + 1}
           y1={0}
