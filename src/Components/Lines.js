@@ -8,8 +8,7 @@ const SVGLine = styled.line`
   transition-timing-function: ease-in-out;
   cursor: pointer;
   stroke-dasharray: ${props => props.height};
-
-  stroke-dashoffset: -${props => props.height / 2};
+  stroke-dashoffset: ${props => props.height * 0.6};
 
   &:hover {
     stroke-dashoffset: 0;

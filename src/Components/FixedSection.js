@@ -13,5 +13,9 @@ export const SubHeader = styled.h2`
 
 export const FixedSection = styled.section`
   position: fixed;
-  padding: 40px;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 60vh;
+  top: 40vh;
 `;
