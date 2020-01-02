@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { FullScreen } from "./Components/Fullscreen";
 import { Lines } from "./Components/Lines";
-import { LinearData, RandomData } from "./data";
+import { LinearData, RandomData, CO2emissionData } from "./data";
 import {
   Description,
   Footer,
@@ -21,21 +21,20 @@ import { Menu } from "./Components/Menu";
 import { Spinner } from "./Components/Icon";
 
 export const App = () => {
-  const dataSources = [LinearData, RandomData];
+  const dataSources = [CO2emissionData, LinearData, RandomData];
   const [dataSourceIndex, setDataSourceIndex] = useState(0);
   const nextDataSource = () => {
     setDataSourceIndex(dataSourceIndex + 1);
     setSelectedValue(null);
   };
   const dataSource = dataSources[dataSourceIndex % dataSources.length];
-  const { title, description, data } = dataSource;
+  const { title, description, data, defaultColors } = dataSource;
   const [selectedValue, setSelectedValue] = useState(null);
 
   const [interpolator, setInterpolator] = useState(() =>
-    getColorInterpolator({ data, interpolatorName: "interpolateBlues" })
+    getColorInterpolator({ interpolatorName: defaultColors })
   );
-  const nextColorInterpolator = () =>
-    setInterpolator(getColorInterpolator({ data }));
+  const nextColorInterpolator = () => setInterpolator(getColorInterpolator());
   const normalize = getNormalizer({ data });
   const getColor = value => interpolator.func(normalize(value));
 
@@ -49,6 +48,7 @@ export const App = () => {
         </SubHeader>
         <Header>{title}</Header>
         <Description>{description}</Description>
+
         <Footer>
           Click the buttons in the lower right corner to change data or color
           palette.

@@ -53,7 +53,7 @@ const getRandomInterPolator = () => {
   return { name, func: interpolators[name] };
 };
 
-export const getColorInterpolator = ({ data, interpolatorName }) => {
+export const getColorInterpolator = ({ interpolatorName } = {}) => {
   const interPolator =
     getInterPolator(interpolatorName) || getRandomInterPolator();
   return {
