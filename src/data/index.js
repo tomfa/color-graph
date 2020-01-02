@@ -22,6 +22,7 @@ export const CO2emissionData = {
   description:
     "Global Carbon Emissions from Fossil-Fuel Burning, " +
     "Cement Manufacture, and Gas Flaring: 1945-2013. Values in million metric tons.",
+  source: 'https://cdiac.ess-dive.lbl.gov/trends/emis/overview.html',
   data: [
     1160,
     1238,

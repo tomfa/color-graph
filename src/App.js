@@ -8,7 +8,8 @@ import {
   Footer,
   Header,
   FixedSection,
-  SubHeader
+  SubHeader,
+  SourceLink
 } from "./Components/FixedSection";
 import { getColorInterpolator, getNormalizer } from "./utils/palette";
 import {
@@ -28,7 +29,7 @@ export const App = () => {
     setSelectedValue(null);
   };
   const dataSource = dataSources[dataSourceIndex % dataSources.length];
-  const { title, description, data, defaultColors } = dataSource;
+  const { title, description, data, defaultColors, source } = dataSource;
   const [selectedValue, setSelectedValue] = useState(null);
 
   const [interpolator, setInterpolator] = useState(() =>
@@ -47,7 +48,10 @@ export const App = () => {
           </a>
         </SubHeader>
         <Header>{title}</Header>
-        <Description>{description}</Description>
+        <Description>
+          {description}{' '}
+          {!!source && <SourceLink href={source}>[source]</SourceLink>}
+        </Description>
 
         <Footer>
           Click the buttons in the lower right corner to change data or color

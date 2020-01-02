@@ -19,6 +19,10 @@ export const SubHeader = styled.h2`
 
 export const Description = styled.p``;
 
+export const SourceLink = styled.a`
+  font-size: 0.8rem;
+`;
+
 export const Footer = styled.small`
   display: none;
   position: fixed;
