@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d52607b311644fcfe6fa5c01b28d4bae",
+    "revision": "1022d31c337deee0467dc1433b932309",
     "url": "/color-graph/index.html"
   },
   {
-    "revision": "5a767cd6b7ac43291a46",
+    "revision": "cc49b8b280cb3312aa9a",
     "url": "/color-graph/static/css/main.684a95bf.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/color-graph/static/js/2.78d2158d.chunk.js.LICENSE"
   },
   {
-    "revision": "5a767cd6b7ac43291a46",
-    "url": "/color-graph/static/js/main.e757aa7f.chunk.js"
+    "revision": "cc49b8b280cb3312aa9a",
+    "url": "/color-graph/static/js/main.5db589dc.chunk.js"
   },
   {
     "revision": "34be794061b41bb367d0",

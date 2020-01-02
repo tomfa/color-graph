@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/color-graph/static/css/main.684a95bf.chunk.css",
-    "main.js": "/color-graph/static/js/main.e757aa7f.chunk.js",
-    "main.js.map": "/color-graph/static/js/main.e757aa7f.chunk.js.map",
+    "main.js": "/color-graph/static/js/main.5db589dc.chunk.js",
+    "main.js.map": "/color-graph/static/js/main.5db589dc.chunk.js.map",
     "runtime-main.js": "/color-graph/static/js/runtime-main.dd9b5061.js",
     "runtime-main.js.map": "/color-graph/static/js/runtime-main.dd9b5061.js.map",
     "static/js/2.78d2158d.chunk.js": "/color-graph/static/js/2.78d2158d.chunk.js",
     "static/js/2.78d2158d.chunk.js.map": "/color-graph/static/js/2.78d2158d.chunk.js.map",
     "index.html": "/color-graph/index.html",
-    "precache-manifest.5ae4c7e94c1184e2533da201e627fb27.js": "/color-graph/precache-manifest.5ae4c7e94c1184e2533da201e627fb27.js",
+    "precache-manifest.e764d41f6ad586855e82411c18b71812.js": "/color-graph/precache-manifest.e764d41f6ad586855e82411c18b71812.js",
     "service-worker.js": "/color-graph/service-worker.js",
     "static/css/main.684a95bf.chunk.css.map": "/color-graph/static/css/main.684a95bf.chunk.css.map",
     "static/js/2.78d2158d.chunk.js.LICENSE": "/color-graph/static/js/2.78d2158d.chunk.js.LICENSE"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.dd9b5061.js",
     "static/js/2.78d2158d.chunk.js",
     "static/css/main.684a95bf.chunk.css",
-    "static/js/main.e757aa7f.chunk.js"
+    "static/js/main.5db589dc.chunk.js"
   ]
 }
