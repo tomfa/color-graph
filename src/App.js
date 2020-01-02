@@ -2,7 +2,12 @@ import React, { useState } from "react";
 
 import { FullScreen } from "./Components/Fullscreen";
 import { Lines } from "./Components/Lines";
-import { LinearData, RandomData, CO2emissionData } from "./data";
+import {
+  CO2emissionData,
+  GlobalTemperatureData,
+  LinearData,
+  RandomData
+} from "./data";
 import {
   Description,
   Footer,
@@ -22,7 +27,12 @@ import { Menu } from "./Components/Menu";
 import { Spinner } from "./Components/Icon";
 
 export const App = () => {
-  const dataSources = [CO2emissionData, LinearData, RandomData];
+  const dataSources = [
+    GlobalTemperatureData,
+    CO2emissionData,
+    LinearData,
+    RandomData
+  ];
   const [dataSourceIndex, setDataSourceIndex] = useState(0);
   const nextDataSource = () => {
     setDataSourceIndex(dataSourceIndex + 1);
