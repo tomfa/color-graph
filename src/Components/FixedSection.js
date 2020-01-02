@@ -39,5 +39,5 @@ export const FixedSection = styled.section`
   box-sizing: border-box;
   width: 100vw;
   height: 60vh;
-  top: 40vh;
+  bottom: 0;
 `;

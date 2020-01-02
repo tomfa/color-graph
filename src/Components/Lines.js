@@ -28,8 +28,8 @@ export const Lines = ({ data, onLineClick, getColor }) => {
   return (
     <svg
       viewBox={`0 0 ${svgWidth} ${svgHeight}`}
-      width={width}
-      height={height}
+      width="100%"
+      height="100%"
       xmlns="http://www.w3.org/2000/svg"
     >
       {data.map((value, i) => (
